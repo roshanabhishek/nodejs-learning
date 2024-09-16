@@ -49,7 +49,7 @@ const fs = require("node:fs/promises");
 // on internal_buffer===16384 it write data and empties internal buffer
 
 // For 10 million
-// Exection time: 3secs
+// Exection time: ~3secs
 // CPU Usage: 100%
 // Memory Usage: ~150MB
 
@@ -57,19 +57,20 @@ const fs = require("node:fs/promises");
 // Exection time: ~350ms
 // CPU Usage: 100%
 // Memory Usage: ~130MB
+
 (async () => {
     console.time("writeMany")
     const fileHandle = await fs.open('write.txt', "w");
     const stream = fileHandle.createWriteStream();
-    const buf = Buffer.alloc(1e+8, 10);
 
-
+    // 1Billion - 4:47.070
+    const counter = 1000000;
     let i = 0;
     const writeManyFn = () => {
-        while(i<1000000) {
+        while(i<counter) {
           const buf = Buffer.from(` ${i} `, 'utf8');
 
-          if(i === 999999) {
+          if(i === counter - 1) {
             return stream.end(buf);
           }
 
