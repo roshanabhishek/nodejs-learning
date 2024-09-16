@@ -1,6 +1,6 @@
 const fs = require('node:fs/promises');
 
-// For 1Billion
+// For 1 Billion
 // Exection time: 2:22.697secs
 // CPU Usage: 100%
 // Memory Usage: ~60MB

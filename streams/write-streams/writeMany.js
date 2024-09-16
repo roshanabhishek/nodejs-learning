@@ -58,13 +58,15 @@ const fs = require("node:fs/promises");
 // CPU Usage: 100%
 // Memory Usage: ~130MB
 
+// 1 Billion 
+// Exection time: 4:47.070s
+
 (async () => {
     console.time("writeMany")
     const fileHandle = await fs.open('write.txt', "w");
     const stream = fileHandle.createWriteStream();
 
-    // 1Billion - 4:47.070
-    const counter = 1000000;
+    const counter = 100000000;
     let i = 0;
     const writeManyFn = () => {
         while(i<counter) {
